@@ -1,0 +1,70 @@
+{
+  "index_patterns": [
+    "ecommerce-products*"
+  ],
+  "template": {
+    "settings": {
+      "index.max_ngram_diff": 7,
+      "analysis": {
+        "filter": {
+          "title_ngram_filter": {
+            "type": "ngram",
+            "min_gram": 3,
+            "max_gram": 10
+          }
+        },
+        "analyzer": {
+          "title_ngram": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+              "lowercase",
+              "title_ngram_filter"
+            ]
+          }
+        }
+      }
+    },
+    "mappings": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            },
+            "ngram": {
+              "type": "text",
+              "analyzer": "title_ngram"
+            }
+          }
+        },
+        "category": {
+          "type": "keyword"
+        },
+        "description": {
+          "type": "text"
+        },
+        "price": {
+          "type": "float"
+        },
+        "image": {
+          "type": "keyword"
+        },
+        "rating_rate": {
+          "type": "float"
+        },
+        "rating_count": {
+          "type": "integer"
+        },
+        "ingest_ts": {
+          "type": "date",
+          "format": "epoch_second"
+        }
+      }
+    }
+  }
+}

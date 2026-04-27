@@ -1,0 +1,5 @@
+total_products=200
+total_orders=70
+avg_items_per_order=6.0
+orders_with_products=70
+lines=140
